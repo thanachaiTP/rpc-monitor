@@ -3,17 +3,17 @@ services:
     build: .
     image: rpc-health:latest
     container_name: rpc-health
-    restart: unless-stopped
+    restart: always
     env_file: .env
     environment:
       LISTEN_PORT: "8080"
     ports:
       - "${HOST_PORT:-8080}:8080"
     # ให้ container เรียก RPC ที่รันบน host ได้ผ่าน host.docker.internal
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
     logging:
       driver: json-file
       options:
         max-size: "10m"
-        max-file: "3"
+        max-file: "1"
